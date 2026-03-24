@@ -97,6 +97,7 @@ a:focus {
 main {
   grid-area: main;
   overflow-y: auto;
+  align-self: start;
   padding: var(--padding);
   background: var(--content-background-color);
   border: var(--border);
@@ -271,7 +272,7 @@ main p,
 main .image,
 main .full-width-image,
 main .two-columns {
-  margin: 3.75em 0;
+  margin: 0.75em 0;
 }
 
 main ol,
@@ -371,6 +372,14 @@ main h6 {
 .two-columns > * {
   flex: 1 1 0;
   margin: 0;
+}
+
+	  /* Small inline icons (use pixels or change to em/rem to match text size) */
+.icon {
+  width: 24px;
+  height: auto;
+  vertical-align: middle;
+  display: inline-block;
 }
 
 .two-columns > *:first-child {
