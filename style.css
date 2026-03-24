@@ -44,7 +44,7 @@ body {
   justify-content: flex-end;
   min-height: 100vh;
   font-size: var(--font-size);
-  margin: 0;
+  margin: 130px;
   padding: var(--margin);
   color: var(--text-color);
   font-family: var(--font);
@@ -198,31 +198,6 @@ aside {
   font-size: 0.7em;
 }
 
-/* -------------------------------------------------------- */
-/* FOOTER */
-/* -------------------------------------------------------- */
-
-footer {
-  grid-area: footer;
-  border: var(--border);
-  border-radius: var(--round-borders);
-  overflow: hidden;
-  font-size: 0.75em;
-  padding: 15px;
-  background: var(--content-background-color);
-  display: flex;
-  justify-content: center;
-}
-
-footer a,
-footer a:visited {
-  color: var(--link-color);
-}
-
-footer a:hover,
-footer a:focus {
-  color: var(--link-color-hover);
-}
 
 /* -------------------------------------------------------- */
 /* NAVIGATION */
@@ -296,7 +271,7 @@ main p,
 main .image,
 main .full-width-image,
 main .two-columns {
-  margin: 0.75em 0;
+  margin: 3.75em 0;
 }
 
 main ol,
