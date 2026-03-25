@@ -117,6 +117,8 @@ function check_servers() {
   for (let server in SERVERS) {
     let status = check_server_status(server);
 
+    console.debug(status);
+
     // Update the status indicator when the response is received
     status.then(() => {
       update_server_status_indicators(server, status);
