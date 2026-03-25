@@ -18,10 +18,11 @@
     <!-- CSS: -->
     <!-- You will have to change this to "../style.css" if this HTML file is in a subfolder, to "../../style.css" if this HTML file is in 2 subfolders, etc. -->
     <link href="./style.css" rel="stylesheet" />
-    
-
-    
-    </script>
+    <style>
+      .status-dot { display:inline-block; width:10px; height:10px; border-radius:50%; background:#999; margin-left:8px; vertical-align:middle; }
+      .status-up { background: #2ecc71; }
+      .status-down { background: #e74c3c; }
+    </style>
   </head>
   <body>
     <!-- The next line is a skip-to-content link for keyboard users. Do not remove it! -->
@@ -55,16 +56,15 @@
           <center><p><img class="icon" src="SnakySite_files/github.ico"> <a href="https://github.com/Snakycat">Github</a> <img class="icon" src="SnakySite_files/github.ico"></center> </p>
           <center><p><img class="icon" src="SnakySite_files/discord.ico"> @<a href="https://discord.com/">snakycat</a> <img class="icon" src="SnakySite_files/discord.ico"></center></p>
           <center><p><img class="icon" src="SnakySite_files/Tumblr.ico"> <a href="https://www.tumblr.com/blog/snakycat">Tumblr</a> <img class="icon" src="SnakySite_files/Tumblr.ico"></center></p>
-
-          <center><p>Necessit atibus perferendis inventore tempore vel optio similique blanditiis quasi quam?</center></p>
-        </div>
-        
+			
+		<hr/>
+	
         <div class="sidebar-section">
-          <div class="sidebar-title"><center>Section Title</center></div>
+          <div class="sidebar-title"><center><strong><p>Notice!</p></strong></center></div>
           <blockquote>
-            <p><center>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</center></p>
-            <p><center>Necessit atibus perferendis inventore tempore vel optio similique blanditiis quasi quam?</center></p>
+            <p><center>Jellyfins server is currently going under maintenance so you may run into issue until its over.</center></p>
           </blockquote>
+            <hr/> 
         </div>
         
         <div class="sidebar-section">
@@ -106,21 +106,21 @@
 
           <h1>Snaky Sites</h1>
           <!--This layout was generated with <a href="https://petrapixel.neocities.org/" target="_blank">petrapixel</a>'s layout generator. You may remove the credit in the footer, but please leave the credit in the code. Thank you!</p-->
-            <p>The sites I currently host are broke up into a few catagories.
+            <p>The sites I currently host are broken up into a few catagories.
                <h2>Media</h2>
-               Audiobookshelf, Plex (retired but still functional), Jellyfin (Plex replacement), and lastly Navidrome (still being set up :p)</p>
+               Audiobookshelf, Plex (retired but still functional), Jellyfin (Plex replacement), and lastly Navidrome (still being set up :p)
                <h2>Media Management</h2>
               Jellyseerr (Jellyfin media request system)
               <br/>
               <br/>
               <h1>Websites</h1>
-              <a href="https://jellyfin.snakycat.uk/web/">Jellyfin</a>/<a href="http://snakycat-jellyfin.duckdns.org/">(Mirror)</a> - My genreal media server, for movies, TV shows, documentaries, and anime. <br/>
+              <a href="https://jellyfin.snakycat.uk/web/">Jellyfin</a><span class="status-dot" id="status-jellyfin"></span>/<a href="http://snakycat-jellyfin.duckdns.org/">(Mirror)<span class="status-dot" id="status-jellyfin_mirror"></span></a> - My genreal media server, for movies, TV shows, documentaries, and anime. <br/>
               <br/>
-              <a href="https://jellyseerr.snakycat.uk/login">Jellyseerr</a>/<a href="http://snakycat-jelly2.duckdns.org/">(Mirror)</a> - The public media request system for any users of my Jellyfin server. <br/>
+              <a href="https://jellyseerr.snakycat.uk/login">Jellyseerr</a><span class="status-dot" id="status-jellyseerr"></span>/<a href="http://snakycat-jelly2.duckdns.org/">(Mirror)<span class="status-dot" id="status-jellyseerr_mirror"></span></a> - The public media request system for any users of my Jellyfin server. <br/>
               <br/>
-              <a href="https://audiobook.snakycat.uk/">Audiobookshelf</a>/<a href="https://snakycat-abs.duckdns.org/">(Mirror)</a> - My audiobook/ebook server. (ebooks are mostly ttrpg books) <br/>
+              <a href="https://audiobook.snakycat.uk/">Audiobookshelf</a><span class="status-dot" id="status-abs"></span>/<a href="https://snakycat-abs.duckdns.org/">(Mirror)<a href="https://audiobook.snakycat.uk/">Audiobookshelf</a><span class="status-dot" id="status-abs_mirror"></span></a> - My audiobook/ebook server. (ebooks are mostly ttrpg books) <br/>
               <br/>
-              <a href="https://Music.snakycat.uk/">Navidrome</a> - My music server. <strong>Recommendation,</strong> if you want to use this for any amount of time regularly use a client for it <a href="https://www.navidrome.org/apps/"> found here.</a><br/>
+              <a href="https://Music.snakycat.uk/">Navidrome</a><span class="status-dot" id="status-navidrome"></span> - My music server. <strong>Recommendation,</strong> if you want to use this for any amount of time regularly use a client for it <a href="https://www.navidrome.org/apps/"> found here.</a><br/>
 
               <br/>
               <br/>
@@ -130,6 +130,15 @@
       </main>
 
 
+        
+      
+
+
+
+
+
+
+
       <!-- =============================================== -->
 
     <!-- Closing .layout: -->
@@ -137,5 +146,10 @@
 
 
     <!-- Add any additional Javascript code (<script></script>) here. -->
+    <script>
+    
+
+    </script>
+
   </body>
 </html>
