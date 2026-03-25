@@ -452,8 +452,8 @@ main h6 {
 /* MOBILE RESPONSIVE */
 /* -------------------------------------------------------- */
 
-/* CSS Code for devices < 800px */
-@media (max-width: 800px) {
+/* CSS Code for devices < 1200px */
+@media (max-width: 1200px) {
   
   :root { 
     --margin: 10px; 
