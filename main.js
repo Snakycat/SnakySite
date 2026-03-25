@@ -145,7 +145,7 @@ function update_server_status_indicators(server, status) {
       ? ONLINE_STATUS_COLOR
       : OFFLINE_STATUS_COLOR;
 
-    main_indicator.style.background = status_color;
+    main_indicator.style.backgroundColor = status_color;
   }
 
   // Update mirror indicator
@@ -154,7 +154,7 @@ function update_server_status_indicators(server, status) {
       ? ONLINE_STATUS_COLOR
       : OFFLINE_STATUS_COLOR;
 
-    mirror_indicator.style.background = status_color;
+    mirror_indicator.style.backgroundColor = status_color;
   }
 }
 
