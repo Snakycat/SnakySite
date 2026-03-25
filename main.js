@@ -28,6 +28,38 @@
 //           4th Argument: Element id of the mirror status indicator (or null if there isnt one)
 
 // --------------------
+// Class Definitions
+// --------------------
+
+// Contains the urls and status indicator element ids of a server
+class Server {
+  constructor(main_url, mirror_url, main_indicator_id, mirror_indicator_id) {
+    this.main_url = main_url;
+    this.mirror_url = mirror_url;
+    this.main_indicator_id = main_indicator_id;
+    this.mirror_indicator_id = mirror_indicator_id;
+  }
+
+  main_url() {
+    return this.main_url;
+  }
+
+  mirror_url() {
+    return this.mirror_url;
+  }
+}
+
+// Contains the statuses of the various urls of a server (stored as booleans)
+// true: online
+// false: offline
+class ServerStatus {
+  constructor(main_status, mirror_status) {
+    this.main_status = main_status;
+    this.mirror_status = mirror_status;
+  }
+}
+
+// --------------------
 // Configuration
 // --------------------
 
@@ -158,36 +190,4 @@ async function check_url(url) {
 async function request_status(url) {
   const response = await fetch(url);
   return response.ok;
-}
-
-// --------------------
-// Class Definitions
-// --------------------
-
-// Contains the urls and status indicator element ids of a server
-class Server {
-  constructor(main_url, mirror_url, main_indicator_id, mirror_indicator_id) {
-    this.main_url = main_url;
-    this.mirror_url = mirror_url;
-    this.main_indicator_id = main_indicator_id;
-    this.mirror_indicator_id = mirror_indicator_id;
-  }
-
-  main_url() {
-    return this.main_url;
-  }
-
-  mirror_url() {
-    return this.mirror_url;
-  }
-}
-
-// Contains the statuses of the various urls of a server (stored as booleans)
-// true: online
-// false: offline
-class ServerStatus {
-  constructor(main_status, mirror_status) {
-    this.main_status = main_status;
-    this.mirror_status = mirror_status;
-  }
 }
