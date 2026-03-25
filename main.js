@@ -122,8 +122,14 @@ function check_servers() {
     let server = SERVERS[i];
     let main_indicator = document.getElementById(server.main_indicator_id);
     let mirror_indicator = document.getElementById(server.mirror_indicator_id);
-    main_indicator.style.backgroundColor = PENDING_STATUS_COLOR;
-    mirror_indicator.style.backgroundColor = PENDING_STATUS_COLOR;
+
+    if (main_indicator != null) {
+      main_indicator.style.backgroundColor = PENDING_STATUS_COLOR;
+    }
+
+    if (mirror_indicator != null) {
+      mirror_indicator.style.backgroundColor = PENDING_STATUS_COLOR;
+    }
   }
 
   // Send out web requests
