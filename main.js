@@ -59,29 +59,29 @@ class ServerStatus {
 const STATUS_INTERVAL_SECONDS = 300; // 5 Minutes
 
 // The colors for the status indicators
-const ONLINE_STATUS_COLOR = "lime";
+const ONLINE_STATUS_COLOR = "green";
 const OFFLINE_STATUS_COLOR = "red";
 
 // The list of servers to status check
 const SERVERS = [
   // Jellyfin
   new Server(
-    "https://jellyfin.snakycat.uk/web/",
-    "http://snakycat-jellyfin.duckdns.org/",
+    "https://jellyfin.snakycat.uk/",
+    "https://snakycat-jellyfin.duckdns.org/",
     "status-jellyfin",
     "status-jellyfin_mirror",
   ),
   // Jellyseerr
   new Server(
     "https://jellyseerr.snakycat.uk/login",
-    "http://snakycat-jelly2.duckdns.org/",
+    "https://snakycat-jelly2.duckdns.org/",
     "status-jellyseerr",
     "status-jellyseerr_mirror",
   ),
   // Audiobookshelf
   new Server(
     "https://audiobook.snakycat.uk/",
-    "https://snakycat-abs.duckdns.org/",
+    "https://snakycat-abs.duckdns.org/audiobookshelf/login",
     "status-abs",
     "status-abs_mirror",
   ),
@@ -114,15 +114,21 @@ addEventListener("load", (_event) => {
 // respective indicator elements
 function check_servers() {
   // Send out web requests
-  for (let server in SERVERS) {
+  for (let i = 0; i < SERVERS.length; i++) {
+    let server = SERVERS[i];
     let status = check_server_status(server);
 
     console.debug(status);
 
     // Update the status indicator when the response is received
-    status.then(() => {
-      update_server_status_indicators(server, status);
-    });
+    status.then(
+      (status) => {
+        update_server_status_indicators(server, status);
+      },
+      (err) => {
+        console.error(err);
+      },
+    );
   }
 }
 
@@ -136,6 +142,12 @@ async function check_server_status(server) {
 
 // Updates the status indicators of a particular server if they exist
 function update_server_status_indicators(server, status) {
+  console.debug(
+    "Updating server status indicators for " +
+      server.main_url +
+      " | " +
+      server.mirror_url,
+  );
   let main_indicator = document.getElementById(server.main_indicator_id);
   let mirror_indicator = document.getElementById(server.mirror_indicator_id);
 
@@ -170,8 +182,15 @@ async function check_url(url) {
 }
 
 // Checks the server status of a url by sending a fetch request to the url
-// if it responds with 2XX then it returns true (online) otherwise false (offline)
+// if it responds with 2XX or 3XX then it returns true (online) otherwise false (offline)
 async function request_status(url) {
-  const response = await fetch(url);
-  return response.ok;
+  try {
+    const response = await fetch(url, {
+      mode: "no-cors",
+    });
+    return response.status < 400;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
 }
