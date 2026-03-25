@@ -456,7 +456,7 @@ main h6 {
 @media (max-width: 800px) {
   
   :root { 
-    --margin: 10px; }
+    --margin: 10px; 
   }
   
   body {
@@ -467,10 +467,6 @@ main h6 {
     width: 100%;
     grid-template: "header" auto  "leftSidebar" auto "main" auto "rightSidebar" auto "footer" auto / 1fr;
   }
-  
-  /* rest of existing mobile styles... */
-}
-
 
   aside {
     border-bottom: 1px solid;
@@ -510,3 +506,9 @@ main h6 {
     font-size: 1rem;
   }
 }
+
+	
+  /* rest of existing mobile styles... */
+}
+
+
