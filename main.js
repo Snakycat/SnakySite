@@ -61,6 +61,7 @@ const STATUS_INTERVAL_SECONDS = 300; // 5 Minutes
 // The colors for the status indicators
 const ONLINE_STATUS_COLOR = "green";
 const OFFLINE_STATUS_COLOR = "red";
+const PENDING_STATUS_COLOR = "gold";
 
 // The list of servers to status check
 const SERVERS = [
@@ -113,6 +114,15 @@ addEventListener("load", (_event) => {
 // Gets the status of the different urls of all the servers and updates their
 // respective indicator elements
 function check_servers() {
+  // Reset status indicators
+  for (let i = 0; i < SERVERS.length; i++) {
+    let server = SERVERS[i];
+    let main_indicator = document.getElementById(server.main_indicator_id);
+    let mirror_indicator = document.getElementById(server.mirror_indicator_id);
+    main_indicator.style.backgroundColor = PENDING_STATUS_COLOR;
+    mirror_indicator.style.backgroundColor = PENDING_STATUS_COLOR;
+  }
+
   // Send out web requests
   for (let i = 0; i < SERVERS.length; i++) {
     let server = SERVERS[i];
