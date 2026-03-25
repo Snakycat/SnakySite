@@ -15,6 +15,8 @@
 //
 // STATUS_INTERVAL_SECONDS - The number of seconds between each automatic status check
 //
+// !!!IMPORTANT!!!: The color variables are now set using the values from style.css.
+//
 // ONLINE_STATUS_COLOR - The CSS colour of the status indicators when their respective
 //                       server is online
 //
@@ -61,10 +63,17 @@ class ServerStatus {
 // The interval between each automatic status check
 const STATUS_INTERVAL_SECONDS = 300; // 5 Minutes
 
-// The colors for the status indicators
-const ONLINE_STATUS_COLOR = "green";
-const OFFLINE_STATUS_COLOR = "red";
-const PENDING_STATUS_COLOR = "gold";
+// The colors for the status indicators (THESE ARE NOW NABBED FROM THE CSS, DO NOT EDIT THEM)
+const ONLINE_STATUS_COLOR = window
+  .getComputedStyle(document.body)
+  .getPropertyValue("--status-online-color");
+const OFFLINE_STATUS_COLOR = window
+  .getComputedStyle(document.body)
+  .getPropertyValue("--status-offline-color");
+
+const PENDING_STATUS_COLOR = window
+  .getComputedStyle(document.body)
+  .getPropertyValue("--status-pending-color");
 
 // The list of servers to status check
 const SERVERS = [
