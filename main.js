@@ -113,19 +113,11 @@ addEventListener("load", (_event) => {
 // Gets the status of the different urls of all the servers and updates their
 // respective indicator elements
 function check_servers() {
-  let status_promises = [];
-
   // Send out web requests
   for (let server in SERVERS) {
     let status = check_server_status(server);
-    status_promises.push({
-      server: server,
-      status: status,
-    });
-  }
 
-  // Wait for the web requests to finish and then update the statuses
-  for (let { server, status } in status_promises) {
+    // Update the status indicator when the response is received
     status.then(() => {
       update_server_status_indicators(server, status);
     });
