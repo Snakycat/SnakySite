@@ -21,6 +21,9 @@
 // OFFLINE_STATUS_COLOR - The CSS colour of the status indicators when their respective
 //                        server is offline
 //
+// PENDING_STATUS_COLOR - The CSS colour of the status indicators when their respective
+//                        server is still being processed
+//
 // SERVERS - The list of servers to check.
 //           1st Argument: Primary server url (or null if there isnt one)
 //           2nd Argument: Mirror server url (or null if there isnt one)
