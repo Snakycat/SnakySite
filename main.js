@@ -133,9 +133,7 @@ function check_servers() {
   }
 
   // Wait for the web requests to finish and then update the statuses
-  for (let server_promise in status_promises) {
-    let server = server_promise.server;
-    let status = server_promise.status;
+  for (let { server, status } in status_promises) {
     status.then(() => {
       update_server_status_indicators(server, status);
     });
