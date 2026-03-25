@@ -39,14 +39,6 @@ class Server {
     this.main_indicator_id = main_indicator_id;
     this.mirror_indicator_id = mirror_indicator_id;
   }
-
-  main_url() {
-    return this.main_url;
-  }
-
-  mirror_url() {
-    return this.mirror_url;
-  }
 }
 
 // Contains the statuses of the various urls of a server (stored as booleans)
@@ -142,8 +134,8 @@ function check_servers() {
 
 // Gets the status of the different urls of the specified server
 async function check_server_status(server) {
-  let main_status = await check_url(server.main_url());
-  let mirror_status = await check_url(server.mirror_url());
+  let main_status = await check_url(server.main_url);
+  let mirror_status = await check_url(server.mirror_url);
 
   return new ServerStatus(main_status, mirror_status);
 }
