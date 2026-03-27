@@ -1,8 +1,17 @@
-"use strict";
+// --------------------
+// Imports
+// --------------------
+import { LOGGER } from "./log.js";
+// --------------------
+// Entry Point
+// --------------------
 function main() {
-    console.log("Hello, Typescript");
+    LOGGER.debug("MAIN", "Hello, Typescript!");
+    LOGGER.info("MAIN", "Hello, Typescript!");
+    LOGGER.warn("MAIN", "Hello, Typescript!");
+    LOGGER.err("MAIN", "Hello, Typescript!");
 }
 // --------------------
-// Entrypoint Bootstrap
+// Bootstrap Entrypoint
 // --------------------
 window.addEventListener("load", main);
