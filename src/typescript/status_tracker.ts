@@ -9,81 +9,84 @@ import { Optional } from "./util.js";
 // Type Definitions
 // --------------------
 
+/**
+ * The possible netowrk statuses of a server on a particular url
+ */
 enum ServerStatus {
   Online = "Online",
   Offline = "Offline",
   Pending = "Pending",
 }
 
+/**
+ * The url of a particular server mirror and everything necessary to track its status
+ */
 class ServerUrl {
   url: string;
-  indicator_id: string;
+  indicator: Optional<HTMLElement>;
   status: ServerStatus;
 
   constructor(url: string, indicator_id: string) {
     this.url = url;
-    this.indicator_id = indicator_id;
+    this.indicator = Optional.from_nullable(
+      document.getElementById(indicator_id),
+    );
     this.status = ServerStatus.Pending;
   }
 
   update_status() {
-    let indicator = document.getElementById(this.indicator_id);
+    // Initialize status display to pending
+    this.indicator.inspect(ServerStatusHelper.set_pending);
 
-    if (indicator !== null) {
-      indicator.style.backgroundColor = server_status_to_css_color(
-        ServerStatus.Pending,
-      );
-    }
-    // TODO: Improve clarity
-    try {
-      const response = fetch(this.url, {
-        mode: "no-cors",
-      });
-      response.then((value) => {
+    // If fetch succeeds, then update the status indicator based on the status of the response
+    // otherwise if fetch fails then set the status to offline and log why the fetch failed
+    const response = fetch(this.url, {
+      mode: "no-cors",
+    });
+
+    response
+      // Fetch Succeeded
+      .then((value) => {
         LOGGER.trace("Status Tracker", `Updating status of ${this.url}`);
-        if (value.status < 400) {
-          this.status = ServerStatus.Online;
-        } else {
-          this.status = ServerStatus.Offline;
-        }
-        if (indicator !== null) {
-          indicator.style.backgroundColor = server_status_to_css_color(
-            this.status,
-          );
-        }
-      });
-    } catch (err) {
-      LOGGER.warn(
-        "Status Tracker",
-        `Failed to update the status of ${this.url}\n\n\tReason: ${err}`,
-      );
-      this.status = ServerStatus.Offline;
-      if (indicator !== null) {
-        indicator.style.backgroundColor = server_status_to_css_color(
-          this.status,
+        // Determine status
+        this.status =
+          value.status < 400 ? ServerStatus.Online : ServerStatus.Offline;
+
+        // Display status
+        this.indicator.inspect(
+          ServerStatusHelper.set_status_color(this.status),
         );
-      }
-    }
+      })
+      // Fetch Failed
+      .catch((err) => {
+        LOGGER.warn(
+          "Status Tracker",
+          `Failed to update the status of ${this.url}\n\n\tReason: ${err}`,
+        );
+        this.status = ServerStatus.Offline;
+
+        // Display status
+        this.indicator.inspect(
+          ServerStatusHelper.set_status_color(this.status),
+        );
+      });
   }
 }
 
+/**
+ * A collection of urls that point to the same server
+ */
 class Server {
-  main_url: Optional<ServerUrl>;
-  mirror_url: Optional<ServerUrl>;
+  urls: ServerUrl[];
 
-  constructor(main_url: ServerUrl | null, mirror_url: ServerUrl | null) {
-    this.main_url = Optional.from_nullable(main_url);
-    this.mirror_url = Optional.from_nullable(mirror_url);
+  constructor(urls: ServerUrl[]) {
+    this.urls = urls;
   }
 
   update_status() {
-    this.main_url.inspect((url) => {
+    for (let url of this.urls) {
       url.update_status();
-    });
-
-    this.mirror_url.inspect((url) => {
-      url.update_status();
-    });
+    }
   }
 }
 
@@ -91,21 +94,20 @@ export function init_status_tracker() {
   // TODO
   //  - Move timer interval to config
   //  - Move status button id to config
-  //  - Perform null check on element getters
 
   LOGGER.info("Status Tracker", "Initializing...");
 
   const SERVERS = [
     // Jellyfin
-    new Server(
+    new Server([
       new ServerUrl("https://jellyfin.snakycat.uk/", "status-jellyfin"),
       new ServerUrl(
         "https://snakycat-jellyfin.duckdns.org/",
         "status-jellyfin_mirror",
       ),
-    ),
+    ]),
     // Jellyseerr
-    new Server(
+    new Server([
       new ServerUrl(
         "https://jellyseerr.snakycat.uk/login",
         "status-jellyseerr",
@@ -114,20 +116,19 @@ export function init_status_tracker() {
         "https://snakycat-jelly2.duckdns.org/",
         "status-jellyseerr_mirror",
       ),
-    ),
+    ]),
     // Audiobookshelf
-    new Server(
+    new Server([
       new ServerUrl("https://audiobook.snakycat.uk/", "status-abs"),
       new ServerUrl(
         "https://snakycat-abs.duckdns.org/audiobookshelf/login",
         "status-abs_mirror",
       ),
-    ),
+    ]),
     // Navidrome
-    new Server(
+    new Server([
       new ServerUrl("https://music.snakycat.uk/", "status-navidrome"),
-      null,
-    ),
+    ]),
   ];
 
   LOGGER.trace("Status Tracker", "Performing initial check...");
@@ -152,40 +153,58 @@ function update_server_statuses(servers: Server[]) {
   }
 }
 
-function server_status_to_css_color(status: ServerStatus): string {
-  let offline_color = window
-    .getComputedStyle(document.body)
-    .getPropertyValue("--status-offline-color");
+// --------------------
+// Helpers
+// --------------------
 
-  let online_color = window
-    .getComputedStyle(document.body)
-    .getPropertyValue("--status-online-color");
-
-  let pending_color = window
-    .getComputedStyle(document.body)
-    .getPropertyValue("--status-pending-color");
-
-  if (offline_color === "") {
-    offline_color = "red";
+class ServerStatusHelper {
+  static set_pending(elem: HTMLElement) {
+    elem.style.backgroundColor = ServerStatusHelper.to_css_color(
+      ServerStatus.Pending,
+    );
   }
 
-  if (online_color === "") {
-    online_color = "green";
+  static set_status_color(status: ServerStatus): (elem: HTMLElement) => void {
+    return (elem) => {
+      elem.style.backgroundColor = ServerStatusHelper.to_css_color(status);
+    };
   }
 
-  if (pending_color === "") {
-    pending_color = "gold";
-  }
+  static to_css_color(status: ServerStatus): string {
+    let offline_color = window
+      .getComputedStyle(document.body)
+      .getPropertyValue("--status-offline-color");
 
-  switch (status) {
-    case ServerStatus.Offline: {
-      return offline_color;
+    let online_color = window
+      .getComputedStyle(document.body)
+      .getPropertyValue("--status-online-color");
+
+    let pending_color = window
+      .getComputedStyle(document.body)
+      .getPropertyValue("--status-pending-color");
+
+    if (offline_color === "") {
+      offline_color = "red";
     }
-    case ServerStatus.Online: {
-      return online_color;
+
+    if (online_color === "") {
+      online_color = "green";
     }
-    case ServerStatus.Pending: {
-      return pending_color;
+
+    if (pending_color === "") {
+      pending_color = "gold";
+    }
+
+    switch (status) {
+      case ServerStatus.Offline: {
+        return offline_color;
+      }
+      case ServerStatus.Online: {
+        return online_color;
+      }
+      case ServerStatus.Pending: {
+        return pending_color;
+      }
     }
   }
 }

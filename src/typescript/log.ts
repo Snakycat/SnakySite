@@ -1,4 +1,4 @@
-enum LogLevel {
+export enum LogLevel {
   Error = 0,
   Warn = 1,
   Info = 2,
@@ -44,5 +44,8 @@ class Logger {
   }
 }
 
-// TODO: make logger init function and then move the log level to config
-export const LOGGER = new Logger(LogLevel.Trace);
+export let LOGGER: Logger;
+
+export function init_logger(log_level: LogLevel) {
+  LOGGER = new Logger(log_level);
+}

@@ -1,4 +1,4 @@
-var LogLevel;
+export var LogLevel;
 (function (LogLevel) {
     LogLevel[LogLevel["Error"] = 0] = "Error";
     LogLevel[LogLevel["Warn"] = 1] = "Warn";
@@ -36,5 +36,7 @@ class Logger {
         }
     }
 }
-// TODO: make logger init function and then move the log level to config
-export const LOGGER = new Logger(LogLevel.Trace);
+export let LOGGER;
+export function init_logger(log_level) {
+    LOGGER = new Logger(log_level);
+}
