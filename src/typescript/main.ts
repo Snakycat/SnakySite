@@ -2,17 +2,15 @@
 // Imports
 // --------------------
 
-import { LOGGER } from "./log.js";
+// import { LOGGER } from "./log.js";
+import { init_status_tracker } from "./status_tracker.js";
 
 // --------------------
 // Entry Point
 // --------------------
 
 function main() {
-  LOGGER.debug("MAIN", "Hello, Typescript!");
-  LOGGER.info("MAIN", "Hello, Typescript!");
-  LOGGER.warn("MAIN", "Hello, Typescript!");
-  LOGGER.err("MAIN", "Hello, Typescript!");
+  init_status_tracker();
 }
 
 // --------------------

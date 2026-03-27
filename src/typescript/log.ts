@@ -44,4 +44,5 @@ class Logger {
   }
 }
 
+// TODO: make logger init function and then move the log level to config
 export const LOGGER = new Logger(LogLevel.Trace);

@@ -13,6 +13,14 @@ export class Optional<T> {
     return new Optional<T>(null);
   }
 
+  static from_nullable<T>(value: T | null): Optional<T> {
+    if (value === null) {
+      return Optional.none();
+    } else {
+      return Optional.some(value);
+    }
+  }
+
   unwrap(): T {
     return this.value!;
   }
