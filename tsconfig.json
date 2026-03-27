@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "outDir": "./src/javascript",
+    "allowJs": false,
+    "target": "es2015",
+    "noImplicitReturns": true,
+    "noImplicitAny": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": true,
+    "strictNullChecks": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "rootDir": "./src/typescript",
+  },
+  "include": ["./src/typescript/**/*"],
+}

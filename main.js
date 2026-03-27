@@ -77,29 +77,8 @@ const PENDING_STATUS_COLOR = window
 
 // The list of servers to status check
 const SERVERS = [
-  // Jellyfin
-  new Server(
-    "https://jellyfin.snakycat.uk/",
-    "https://snakycat-jellyfin.duckdns.org/",
-    "status-jellyfin",
-    "status-jellyfin_mirror",
-  ),
-  // Jellyseerr
-  new Server(
-    "https://jellyseerr.snakycat.uk/login",
-    "https://snakycat-jelly2.duckdns.org/",
-    "status-jellyseerr",
-    "status-jellyseerr_mirror",
-  ),
-  // Audiobookshelf
-  new Server(
-    "https://audiobook.snakycat.uk/",
-    "https://snakycat-abs.duckdns.org/audiobookshelf/login",
-    "status-abs",
-    "status-abs_mirror",
-  ),
   // Navidrome
-  new Server("https://music.snakycat.uk/", null, "status-navidrome", null),
+  new Server(, null, , null),
 ];
 
 // -------------------
