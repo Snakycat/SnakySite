@@ -1,6 +1,15 @@
 // --------------------
 // Imports
 // --------------------
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import { LOGGER } from "./log.js";
 import { Optional } from "./util.js";
 // --------------------
@@ -55,7 +64,8 @@ class ServerUrl {
  * A collection of urls that point to the same server
  */
 class Server {
-    constructor(urls) {
+    constructor(name, urls) {
+        this.name = name;
         this.urls = urls;
     }
     update_status() {
@@ -64,46 +74,60 @@ class Server {
         }
     }
 }
+class Config {
+    constructor(status_button_id, update_interval_seconds, servers) {
+        this.status_button_id = status_button_id;
+        this.update_interval_seconds = update_interval_seconds;
+        this.servers = servers;
+    }
+    static from_fetch_file(path) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let request = yield fetch(path);
+            let json = (yield request.json());
+            console.log(json);
+            let servers = [];
+            for (let name in json.servers) {
+                let urls = [];
+                for (let { url, status_id } of json.servers[name]) {
+                    urls.push(new ServerUrl(url, status_id));
+                }
+                servers.push(new Server(name, urls));
+            }
+            return new Config(json.status_button_id, json.update_interval_seconds, servers);
+        });
+    }
+}
+// --------------------
+// Functions
+// --------------------
 export function init_status_tracker() {
-    // TODO
-    //  - Move timer interval to config
-    //  - Move status button id to config
-    LOGGER.info("Status Tracker", "Initializing...");
-    const SERVERS = [
-        // Jellyfin
-        new Server([
-            new ServerUrl("https://jellyfin.snakycat.uk/", "status-jellyfin"),
-            new ServerUrl("https://snakycat-jellyfin.duckdns.org/", "status-jellyfin_mirror"),
-        ]),
-        // Jellyseerr
-        new Server([
-            new ServerUrl("https://jellyseerr.snakycat.uk/login", "status-jellyseerr"),
-            new ServerUrl("https://snakycat-jelly2.duckdns.org/", "status-jellyseerr_mirror"),
-        ]),
-        // Audiobookshelf
-        new Server([
-            new ServerUrl("https://audiobook.snakycat.uk/", "status-abs"),
-            new ServerUrl("https://snakycat-abs.duckdns.org/audiobookshelf/login", "status-abs_mirror"),
-        ]),
-        // Navidrome
-        new Server([
-            new ServerUrl("https://music.snakycat.uk/", "status-navidrome"),
-        ]),
-    ];
-    LOGGER.trace("Status Tracker", "Performing initial check...");
-    update_server_statuses(SERVERS);
-    LOGGER.trace("Status Tracker", "Starting up automatic timer...");
-    setInterval(update_server_statuses, 300000, SERVERS);
-    LOGGER.trace("Status Tracker", "Enabling the manual check button...");
-    // TODO: make more robust
-    document.getElementById("check-status-btn").onclick = () => {
-        update_server_statuses(SERVERS);
-    };
-    LOGGER.info("Status Tracker", "Initialized!");
+    init_status_tracker_async().catch((err) => {
+        LOGGER.err("Status Tracker", `Failed to initialize status tracker, status tracker disabled!\n\nReason: ${err}`);
+    });
+}
+function init_status_tracker_async() {
+    return __awaiter(this, void 0, void 0, function* () {
+        LOGGER.info("Status Tracker", "Initializing...");
+        LOGGER.trace("Status Tracker", "Loading config file...");
+        let config = yield Config.from_fetch_file("config/status_tracker.json");
+        LOGGER.trace("Status Tracker", "Performing initial check...");
+        update_server_statuses(config.servers);
+        LOGGER.trace("Status Tracker", "Starting up automatic timer...");
+        setInterval(update_server_statuses, config.update_interval_seconds * 1000, config.servers);
+        LOGGER.trace("Status Tracker", "Enabling the manual check button...");
+        let status_button = Optional.from_nullable(document.getElementById(config.status_button_id));
+        status_button.inspect((btn) => {
+            btn.onclick = () => {
+                update_server_statuses(config.servers);
+            };
+        });
+        LOGGER.info("Status Tracker", "Initialized!");
+    });
 }
 function update_server_statuses(servers) {
     LOGGER.info("Status Tracker", "Checking server statuses...");
     for (let server of servers) {
+        LOGGER.info("Status Tracker", `Checking status of ${server.name}`);
         server.update_status();
     }
 }
