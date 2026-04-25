@@ -1,157 +1,182 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
+    <head>
+        <!-- Change your site title: (It is shown in the tab) -->
+        <title>SnakyCat</title>
 
-    <!-- Change your site title: (It is shown in the tab) -->
-    <title>SnakyCat</title>
+        <!-- Change your site description: (It is shown in Google results) -->
+        <meta content="Snakycat's landing page" name="description" />
 
-    <!-- Change your site description: (It is shown in Google results) -->
-    <meta content="Snakycat's landing page" name="description" />
+        <!-- Setting character encoding and viewport size. Do not remove. -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Setting character encoding and viewport size. Do not remove. -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- FavIcon (small image in tab), change to any image you want: -->
+        <link href="favicon.ico" rel="icon" type="image/x-icon" />
 
-    <!-- FavIcon (small image in tab), change to any image you want: -->
-    <link href="favicon.ico" rel="icon" type="image/x-icon" />
+        <!-- CSS: -->
+        <!-- You will have to change this to "../style.css" if this HTML file is in a subfolder, to "../../style.css" if this HTML file is in 2 subfolders, etc. -->
+        <link href="./style/style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- The next line is a skip-to-content link for keyboard users. Do not remove it! -->
+        <a href="#content" id="skip-to-content-link">Skip to content</a>
 
-    <!-- CSS: -->
-    <!-- You will have to change this to "../style.css" if this HTML file is in a subfolder, to "../../style.css" if this HTML file is in 2 subfolders, etc. -->
-    <link href="./style/style.css" rel="stylesheet" />
-  </head>
-  <body>
-    <!-- The next line is a skip-to-content link for keyboard users. Do not remove it! -->
-    <a href="#content" id="skip-to-content-link">Skip to content</a>
+        <div class="layout">
+            <!-- =============================================== -->
+            <!-- HEADER -->
+            <!-- =============================================== -->
 
-    <div class="layout">
+            <header>
+                <div class="header-content">
+                    <div class="header-title">
+                        <center>SnakyCat Nests</center>
+                    </div>
+                </div>
+            </header>
 
-      <!-- =============================================== -->
-      <!-- HEADER -->
-      <!-- =============================================== -->
+            <!-- =============================================== -->
+            <!-- RIGHT SIDEBAR -->
+            <!-- =============================================== -->
 
-      <header>
+            <aside class="right-sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-title">
+                        <center>Links / Contact</center>
+                    </div>
+                    <center>
+                        <p>
+                            <img class="icon" src="assets/github.ico" />
+                            <a href="https://github.com/Snakycat">Github</a>
+                            <img class="icon" src="assets/github.ico" />
+                        </p>
+                    </center>
+                    <center>
+                        <p>
+                            <img class="icon" src="assets/discord.ico" />
+                            <a href="https://discord.com/">@snakycat</a>
+                            <img class="icon" src="assets/discord.ico" />
+                        </p>
+                    </center>
+                    <center>
+                        <p>
+                            <img class="icon" src="assets/Tumblr.ico" />
+                            <a href="https://www.tumblr.com/blog/snakycat">Tumblr</a>
+                            <img class="icon" src="assets/Tumblr.ico" />
+                        </p>
+                    </center>
+                </div>
 
-        <div class="header-content">
-	        <div class="header-title"><center>SnakyCat Nests</center></div>
+                <hr />
 
+                <div class="sidebar-section">
+                    <div class="sidebar-title">
+                        <center>
+                            <strong><p>Notice!</p></strong>
+                        </center>
+                    </div>
+                    <blockquote>
+                        <p>
+                            <center>
+                                Jellyfin's server is currently going under maintenance so you may
+                                run into issues until maintenance is over.
+                            </center>
+                        </p>
+                    </blockquote>
+                </div>
 
+                <hr />
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title">
+                        <center>Section Title</center>
+                    </div>
+                    <ul>
+                        <li>List</li>
+                        <li>List</li>
+                        <li><a href="/">List</a></li>
+                        <li>List</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title">
+                        <center>Section Title</center>
+                    </div>
+                    <img class="full-width-image" src="https://picsum.photos/id/16/1000/400" />
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Section Title</div>
+                    <div class="site-button"></div>
+                </div>
+            </aside>
+
+            <main id="content">
+                <!-- Do NOT remove the ID here -->
+
+                <!-- =============================================== -->
+                <!-- MAIN CONTENT -->
+                <!-- =============================================== -->
+
+                <section>
+                    <h1>Snaky Sites</h1>
+                    <!--This layout was generated with <a href="https://petrapixel.neocities.org/" target="_blank">petrapixel</a>'s layout generator. You may remove the credit in the footer, but please leave the credit in the code. Thank you!</p-->
+                    <p>The sites I currently host are broken up into a few catagories.</p>
+                    <h2>Media</h2>
+                    <p>
+                        Audiobookshelf, Plex (retired but still functional), Jellyfin (Plex
+                        replacement), and lastly Navidrome (still being set up :p)
+                    </p>
+                    <h2>Media Management</h2>
+                    <p>Jellyseerr (Jellyfin media request system)</p>
+                    <br />
+                    <br />
+                    <h1>Websites</h1>
+
+                    <p><button id="check-status-btn">Check Status</button></p>
+
+                    <a href="https://jellyfin.snakycat.uk/web/">Jellyfin</a
+                    ><span class="status-dot" id="status-jellyfin"></span>/<a
+                        href="http://snakycat-jellyfin.duckdns.org/"
+                        >(Mirror)</a
+                    ><span class="status-dot" id="status-jellyfin_mirror"></span> - My genreal media
+                    server, for movies, TV shows, documentaries, and anime. <br />
+                    <br />
+                    <a href="https://jellyseerr.snakycat.uk/login">Jellyseerr</a
+                    ><span class="status-dot" id="status-jellyseerr"></span>/<a
+                        href="http://snakycat-jelly2.duckdns.org/"
+                        >(Mirror)</a
+                    ><span class="status-dot" id="status-jellyseerr_mirror"></span> - The public
+                    media request system for any users of my Jellyfin server. <br />
+                    <br />
+                    <a href="https://audiobook.snakycat.uk/">Audiobookshelf</a
+                    ><span class="status-dot" id="status-abs"></span>/<a
+                        href="https://snakycat-abs.duckdns.org/"
+                        >(Mirror)</a
+                    ><span class="status-dot" id="status-abs_mirror"></span> - My audiobook/ebook
+                    server. (ebooks are mostly ttrpg books)
+                    <br />
+                    <br />
+                    <a href="https://Music.snakycat.uk/">Navidrome</a
+                    ><span class="status-dot" id="status-navidrome"></span> - My music server.
+                    <strong>Recommendation,</strong> if you want to use this for any amount of time
+                    regularly use a client for it
+                    <a href="https://www.navidrome.org/apps/"> found here.</a><br />
+
+                    <br />
+                    <br />
+                </section>
+            </main>
+
+            <!-- =============================================== -->
+
+            <!-- Closing .layout: -->
         </div>
-      </header>
 
+        <!-- Add any additional Javascript code (<script></script>) here. -->
+        <script></script>
 
-      <!-- =============================================== -->
-      <!-- RIGHT SIDEBAR -->
-      <!-- =============================================== -->
-
-      <aside class="right-sidebar">
-
-
-        <div class="sidebar-section">
-          <div class="sidebar-title"><center>Links / Contact</center></div>
-          <center><p><img class="icon" src="assets/github.ico"> <a href="https://github.com/Snakycat">Github</a> <img class="icon" src="assets/github.ico"></center> </p>
-          <center><p><img class="icon" src="assets/discord.ico"> @<a href="https://discord.com/">snakycat</a> <img class="icon" src="assets/discord.ico"></center></p>
-          <center><p><img class="icon" src="assets/Tumblr.ico"> <a href="https://www.tumblr.com/blog/snakycat">Tumblr</a> <img class="icon" src="assets/Tumblr.ico"></center></p>
-
-		<hr/>
-
-        <div class="sidebar-section">
-          <div class="sidebar-title"><center><strong><p>Notice!</p></strong></center></div>
-          <blockquote>
-            <p><center>Jellyfin's server is currently going under maintenance so you may run into issues until maintenance is over.</center></p>
-          </blockquote>
-            <hr/>
-        </div>
-
-        <div class="sidebar-section">
-          <div class="sidebar-title"><center>Section Title</center></div>
-          <ul>
-            <li>List</li>
-            <li>List</li>
-            <li><a href="/">List</a></li>
-            <li>List</li>
-          </ul>
-        </div>
-
-
-
-        <div class="sidebar-section">
-          <div class="sidebar-title"><center>Section Title</center></div>
-          <img class="full-width-image" src="https://picsum.photos/id/16/1000/400">
-        </div>
-
-        <div class="sidebar-section">
-          <div class="sidebar-title">Section Title</div>
-          <div class="site-button">
-
-          </div>
-        </div>
-      </aside>
-
-
-      <main id="content"> <!-- Do NOT remove the ID here -->
-
-
-
-        <!-- =============================================== -->
-        <!-- MAIN CONTENT -->
-        <!-- =============================================== -->
-
-
-        <section>
-
-          <h1>Snaky Sites</h1>
-          <!--This layout was generated with <a href="https://petrapixel.neocities.org/" target="_blank">petrapixel</a>'s layout generator. You may remove the credit in the footer, but please leave the credit in the code. Thank you!</p-->
-            <p>The sites I currently host are broken up into a few catagories.
-               <h2>Media</h2>
-               Audiobookshelf, Plex (retired but still functional), Jellyfin (Plex replacement), and lastly Navidrome (still being set up :p)
-               <h2>Media Management</h2>
-              Jellyseerr (Jellyfin media request system)
-              <br/>
-              <br/>
-              <h1>Websites</h1>
-
-              <p><button id="check-status-btn">Check Status</button></p>
-
-              <a href="https://jellyfin.snakycat.uk/web/">Jellyfin</a><span class="status-dot" id="status-jellyfin"></span>/<a href="http://snakycat-jellyfin.duckdns.org/">(Mirror)</a><span class="status-dot" id="status-jellyfin_mirror"></span> - My genreal media server, for movies, TV shows, documentaries, and anime. <br/>
-              <br/>
-              <a href="https://jellyseerr.snakycat.uk/login">Jellyseerr</a><span class="status-dot" id="status-jellyseerr"></span>/<a href="http://snakycat-jelly2.duckdns.org/">(Mirror)</a><span class="status-dot" id="status-jellyseerr_mirror"></span> - The public media request system for any users of my Jellyfin server. <br/>
-              <br/>
-              <a href="https://audiobook.snakycat.uk/">Audiobookshelf</a><span class="status-dot" id="status-abs"></span>/<a href="https://snakycat-abs.duckdns.org/">(Mirror)</a><span class="status-dot" id="status-abs_mirror"></span> - My audiobook/ebook server. (ebooks are mostly ttrpg books) <br/>
-              <br/>
-              <a href="https://Music.snakycat.uk/">Navidrome</a><span class="status-dot" id="status-navidrome"></span> - My music server. <strong>Recommendation,</strong> if you want to use this for any amount of time regularly use a client for it <a href="https://www.navidrome.org/apps/"> found here.</a><br/>
-
-
-
-              <br/>
-              <br/>
-
-
-        </section>
-      </main>
-
-
-
-
-
-
-
-
-
-
-
-      <!-- =============================================== -->
-
-    <!-- Closing .layout: -->
-    </div>
-
-
-    <!-- Add any additional Javascript code (<script></script>) here. -->
-    <script>
-
-
-    </script>
-
-    <script type="module" src="src/javascript/main.js"></script>
-
-  </body>
+        <script type="module" src="src/javascript/main.js"></script>
+    </body>
 </html>
