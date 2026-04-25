@@ -1,0 +1,42 @@
+{
+  "status_button_id": "check-status-btn",
+  "update_interval_seconds": 300,
+  "servers": {
+    "jellyfin": [
+      {
+        "url": "https://jellyfin.snakycat.uk/",
+        "status_id": "status-jellyfin"
+      },
+      {
+        "url": "https://snakycat-jellyfin.duckdns.org/",
+        "status_id": "status-jellyfin_mirror"
+      }
+    ],
+    "jellyseerr": [
+      {
+        "url": "https://jellyseerr.snakycat.uk/login",
+        "status_id": "status-jellyseerr"
+      },
+      {
+        "url": "https://snakycat-jelly2.duckdns.org/",
+        "status_id": "status-jellyseerr_mirror"
+      }
+    ],
+    "audiobookshelf": [
+      {
+        "url": "https://audiobook.snakycat.uk/",
+        "status_id": "status-abs"
+      },
+      {
+        "url": "https://snakycat-abs.duckdns.org/audiobookshelf/login",
+        "status_id": "status-abs_mirror"
+      }
+    ],
+    "navidrome": [
+      {
+        "url": "https://music.snakycat.uk/",
+        "status_id": "status-navidrome"
+      }
+    ]
+  }
+}
