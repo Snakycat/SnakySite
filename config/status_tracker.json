@@ -37,6 +37,18 @@
         "url": "https://music.snakycat.uk/",
         "status_id": "status-navidrome"
       }
+    ],
+    "Kogma": [
+      {
+        "url": "https://comics.snakycat.uk",
+        "status_id": "status-kogma"
+      }
+    ],
+    "JellyStat":[
+          {
+        "url": "https://JellyStat.snakycat.uk",
+        "status_id": "status-jellystat"
+      }
     ]
   }
 }
